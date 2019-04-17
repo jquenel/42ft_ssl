@@ -1,0 +1,3 @@
+[submodule "libargc"]
+	path = libargc
+	url = https://github.com/jquenel/libargc.git
