@@ -26,9 +26,9 @@ CFLAGS=		-Wextra -Wall -Werror #-g -fsanitize=address
 
 CC=			gcc
 
-LDFLAGS=
+LDFLAGS=	-Llibargc
 
-LIBS=
+LIBS=		-largc
 
 LDLIBS=		$(LDFLAGS) $(LIBS)
 
@@ -37,7 +37,7 @@ LDLIBS=		$(LDFLAGS) $(LIBS)
 ##		Compile with test for special testing purposes.
 ##
 
-all:			$(NAME)
+all:			clibs $(NAME)
 
 $(NAME):		$(OBJ)
 				$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDLIBS)
@@ -46,6 +46,9 @@ $(NAME):		$(OBJ)
 $(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
 				@mkdir $(OBJ_PATH) 2> /dev/null || true
 				$(CC) $(CFLAGS) -o $@ -c $< $(CPPFLAGS)
+
+clibs:			
+				@make -C libargc
 
 ##
 ##		Use fclean to clean this program.
@@ -59,6 +62,11 @@ fclean:			clean
 				@rm -f $(NAME)
 				@echo "fclean"
 
+lclean:			fclean
+				@make -C libargc fclean
+
 re:				fclean all
+
+lre:			lclean all
 
 .PHONY:			all clean fclean re
