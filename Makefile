@@ -8,9 +8,15 @@ SRC_PATH=	src
 
 OBJ_PATH=	obj
 
-CPPFLAGS=	-Iinclude
+CPPFLAGS=	-Iinclude -Ilibargc/include
 
 SRC_NAME=	ft_ssl.c\
+			ssl_build_parsers.c\
+			ssl_dgst_parsers.c\
+			\
+			ssl_md5.c\
+			ssl_sha256.c\
+			\
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
