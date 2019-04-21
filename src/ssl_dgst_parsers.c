@@ -1,5 +1,6 @@
 #include "libargc.h"
 #include "ft_ssl.h"
+#include "ssl_dgst.h"
 
 static t_argparser	*ssl_md5_parser(void)
 {
