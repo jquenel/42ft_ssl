@@ -15,7 +15,12 @@ SRC_NAME=	ft_ssl.c\
 			ssl_dgst_parsers.c\
 			\
 			ssl_md5.c\
+			ssl_md5_init.c\
+			ssl_md5_del.c\
 			ssl_sha256.c\
+			\
+			ft_rotl.c\
+			ft_bzero.c\
 			\
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
