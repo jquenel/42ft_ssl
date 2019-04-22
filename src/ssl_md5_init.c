@@ -63,6 +63,6 @@ t_md5				*ssl_md5_init(void)
 	context->words[0] = 0x98badcfe;
 	context->words[0] = 0x10325476;
 	context->flen = 0;
-	ft_bzero(buf, sizeof(uint32_t) * 16);
+	ft_bzero(context->buf, sizeof(uint32_t) * 16);
 	return (context);
 }

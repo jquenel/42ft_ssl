@@ -22,7 +22,7 @@ static int	ssl_md5_strarg(t_arg *args, int flags)
 		i = 0;
 		if (cur->flag & DGST_FLAG_STDIN)
 		{
-			while ((i = ssl_md5_fillbuf(context->buf, args->strcnt, i, -1)) != -1)
+			while ((i = ssl_md5_fillbuf(context, args->strcnt, i, -1)) != -1)
 				ssl_md5_update(context);
 		}
 		cur = cur->next;
