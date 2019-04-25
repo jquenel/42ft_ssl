@@ -11,19 +11,22 @@
 
 typedef struct			s_md5
 {
-	uint32_t		buf[16];
-	uint32_t		words[4];
 	uint64_t		flen;
-	uint32_t		*k;
-	uint32_t		*s;	
+	int				endian;
+	uint32_t		*words;
+	unsigned char	*buf;
 }						t_md5;
 
-int		ssl_md5(t_arg *args, int flags);
-int		ssl_md5_fillbuf(t_md5 *context, char const *src, int i, int fd);
-void	ssl_md5_update(t_md5 *context);
-t_md5	*ssl_md5_init(void);
-void	ssl_md5_del(t_md5 *context);
+int				ssl_md5(t_arg *args, int flags);
+t_md5			*ssl_md5_init(void);
+void			ssl_md5_del(t_md5 *context);
+uint32_t		ssl_md5_decode(unsigned char *input, int endian);
+void			ssl_md5_encode(uint32_t n, unsigned char *s, int endian);
+int				ssl_md5_fillbuf(t_md5 *context, char const *src, int i, int fd);
+void			ssl_md5_update(t_md5 *context);
+void			ssl_md5_print(t_md5 *context, int flags);
 
-int		ssl_sha256(t_arg *args, int flags);
+
+int				ssl_sha256(t_arg *args, int flags);
 
 #endif

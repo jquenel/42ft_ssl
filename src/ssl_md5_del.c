@@ -15,5 +15,7 @@
 
 void	ssl_md5_del(t_md5 *context)
 {
+	free(context->buf);
+	free(context->words);
 	free(context);
 }

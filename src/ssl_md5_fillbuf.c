@@ -14,21 +14,18 @@
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
 
-static int	pad(t_md5 *context, int count)
+static int	pad(t_md5 *context, int count, int ispadding)
 {
-	int		i;
-
-	while (count < (512 - 64) / 8)
+	if (!ispadding)
 	{
-		((char *)context->buf)[count] = 0;
+		context->buf[count] = 0x80;
 		count++;
 	}
-	i = 0;
-	while (i < 64 / 8)
-	{
-		((char *)context->buf)[count + i] = ((char *)context->flen)[i];
-		i++;
-	}
+	ft_bzero(&(context->buf[count]), 56 - count);
+	ssl_md5_encode(((uint32_t *)&(context->flen))[0], 
+			&(context->buf[56]), context->endian);
+	ssl_md5_encode(((uint32_t *)&(context->flen))[1],
+			&(context->buf[60]), context->endian);
 	return (-1);
 }
 
@@ -38,27 +35,27 @@ int			read_from_src(t_md5 *context, char const *src, int i)
 	int			count;
 
 	if (ispadding != 0 && !(ispadding = 0))
-		return (pad(context, 0));
+		return (pad(context, 0, 1));
 	if (!src)
 		return (-2);
 	count = 0;
-	while (count < 512 / 8 && src[i + count])
+	while (count < 64 && src[i + count])
 	{
-		((char *)context->buf)[count] = src[i + count];
+		context->buf[count] = src[i + count];
 		count++;
 	}
-	context->flen += count;
-	if (count < (512 / 64) / 8)
-		return (pad(context, count));
-	else if (count < 512 / 8)
+	context->flen += count * 8;
+	if (count < 55)
+		return (pad(context, count, 0));
+	else if (count < 64)
 	{
-		ft_bzero(&(((char *)context->buf)[count]), (512 / 8) - count);
+		context->buf[count] = 0x80;
+		ft_bzero(&(context->buf[count]), 64 - (count + 1));
 		ispadding = 1;
 		return (i + count);
 	}
 	else
 		return (i + count);
-	return (-2);
 }
 
 int			ssl_md5_fillbuf(t_md5 *context, char const *src, int i, int fd)
@@ -67,22 +64,24 @@ int			ssl_md5_fillbuf(t_md5 *context, char const *src, int i, int fd)
 	int			count;
 
 	if (ispadding != 0 && !(ispadding = 0))
-		return (pad(context, 0));
+		return (pad(context, 0, 1));
 	if (fd != -1)
 	{
-		if ((count = read(fd, context->buf, 512 / 8)) == -1)
+		if ((count = read(fd, context->buf, 64)) == -1)
 			return (-2);
-		context->flen += count;
-		if (count < (512 - 64) / 8)
-			return (pad(context, count));
-		else if (count < 512 / 8)
+		context->flen += count * 8;
+		if (count < 55)
+			return (pad(context, count, 0));
+		else if (count < 64)
 		{
-			ft_bzero(&(((char *)context->buf)[count]), (512 / 8) - count);
+			context->buf[count] = 0x80;
+			ft_bzero(&(context->buf[count]), 64 - (count + 1));
 			ispadding = 1;
 			return (i + count);
 		}
+		else
+			return (i + count);
 	}
 	else
 		return (read_from_src(context, src, i));
-	return (-2);
 }
