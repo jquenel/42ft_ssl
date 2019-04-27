@@ -26,6 +26,7 @@ SRC_NAME=	ft_ssl.c\
 			ssl_sha256.c\
 			\
 			ft_putchar.c\
+			ft_read_stdin.c\
 			ft_rotl.c\
 			ft_bzero.c\
 			ft_endian.c\

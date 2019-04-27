@@ -18,6 +18,7 @@ t_argparser		*ssl_build_parsers(void);
 t_argparser		*ssl_dgst_parsers(void);
 
 int				ft_putchar(char c);
+int				ft_read_stdin(char *buf, size_t bufsize);
 uint32_t		ft_rotl32(uint32_t word, uint32_t n);
 void			ft_bzero(void *ptr, size_t n);
 int				ft_endian(void);
