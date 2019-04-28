@@ -38,7 +38,6 @@ uint32_t		ssl_md5_decode(char *input, int endian)
 				| (((uint32_t)input[1] & 0xff) << 8)
 				| (((uint32_t)input[2] & 0xff) << 16)
 				| (((uint32_t)input[3] & 0xff) << 24));
-	   //printf("decoding : %x\n", n);
 	   return (n);
 	}
 	if (endian == LITTLE_ENDIAN)

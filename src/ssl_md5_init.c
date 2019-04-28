@@ -19,10 +19,11 @@ t_md5				*ssl_md5_init(void)
 {
 	t_md5		*context;
 
-	if (!(context = malloc(sizeof(context))))
+	if (!(context = (t_md5 *)malloc(sizeof(t_md5))))
 		return (NULL);
-	if (!(context->buf = malloc(sizeof(char) * 64))
-		|| !(context->words = malloc(sizeof(uint32_t) * 4)))
+	if (!(context->buf = (unsigned char *)malloc(sizeof(unsigned char) * 64)))
+		return (NULL);
+	if (!(context->words = (uint32_t *)malloc(sizeof(uint32_t) * 4)))
 		return (NULL);
 	context->words[0] = 0x67452301;
 	context->words[1] = 0xefcdab89;

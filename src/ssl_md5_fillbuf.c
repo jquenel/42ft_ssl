@@ -21,7 +21,7 @@ static int	pad(t_md5 *context, int count, int ispadding)
 		context->buf[count] = 0x80;
 		count++;
 	}
-	ft_bzero(&(context->buf[count]), 56 - count);
+	ft_bzero(&(context->buf[count]), 55 - count);
 	ssl_md5_encode(((uint32_t *)&(context->flen))[0], 
 			&(context->buf[56]), context->endian);
 	ssl_md5_encode(((uint32_t *)&(context->flen))[1],
@@ -29,88 +29,48 @@ static int	pad(t_md5 *context, int count, int ispadding)
 	return (-1);
 }
 
-int			read_from_src(t_md5 *context, char const *src, int i)
+static int	read_from_x(t_md5 *context, char const *src, int i, int fd)
 {
-	static int	ispadding = 0;
-	int			count;
+	int		count;
 
-	if (ispadding != 0 && !(ispadding = 0))
-		return (pad(context, 0, 1));
-	if (!src)
-		return (-2);
 	count = 0;
-	while (count < 64 && src[i + count])
-	{
-		context->buf[count] = src[i + count];
-		count++;
-	}
-	context->flen += count * 8;
-	if (count < 55)
-		return (pad(context, count, 0));
-	else if (count < 64)
-	{
-		context->buf[count] = 0x80;
-		ft_bzero(&(context->buf[count]), 64 - (count + 1));
-		ispadding = 1;
-		return (i + count);
-	}
+	if (fd == 0)
+		return ft_read_stdin((char *)context->buf, 64);
+	else if (fd > 0)
+		return read(fd, context->buf, 64);
 	else
-		return (i + count);
-}
-
-int			read_from_stdin(t_md5 *context, int i)
-{
-	static int	ispadding = 0;
-	int			count;
-
-	if (ispadding != 0 && !(ispadding = 0))
-		return (pad(context, 0, 1));
-	if ((count = ft_read_stdin((char *)context->buf, 64)) == -1)
-		return (-2);
-	context->flen += count * 8;
-	if (count < 55)
-		return (pad(context, count, 0));
-	else if (count < 64)
 	{
-		context->buf[count] = 0x80;
-		ft_bzero(&(context->buf[count]), 64 - (count + 1));
-		ispadding = 1;
-		return (i + count);
+		if (!src)
+			return (-1);
+		while (count < 64 && src[i + count])
+		{
+			context->buf[count] = src[i + count];
+			count++;
+		}
+		return (count);
 	}
-	else
-		return (i + count);
-}
-
-
-int			read_from_file(t_md5 *context, int i, int fd)
-{
-	static int	ispadding = 0;
-	int			count;
-
-	if (ispadding != 0 && !(ispadding = 0))
-		return (pad(context, 0, 1));
-	if ((count = read(fd, context->buf, 64)) == -1)
-		return (-2);
-	context->flen += count * 8;
-	if (count < 55)
-		return (pad(context, count, 0));
-	else if (count < 64)
-	{
-		context->buf[count] = 0x80;
-		ft_bzero(&(context->buf[count]), 64 - (count + 1));
-		ispadding = 1;
-		return (i + count);
-	}
-	else
-		return (i + count);
 }
 
 int			ssl_md5_fillbuf(t_md5 *context, char const *src, int i, int fd)
 {
-	if (fd > 0)
-		return (read_from_file(context, i, fd));
-	else if (fd == 0)
-		return (read_from_stdin(context, i));
+	static int	ispadding = 0;
+	int			count;
+
+	if (ispadding != 0 && !(ispadding = 0))
+		return (pad(context, 0, 1));
+	if ((count = read_from_x(context, src, i, fd)) == -1)
+		return (-2);
+	context->flen += count * 8;
+	if (count < 55)
+		return (pad(context, count, 0));
+	else if (count < 64)
+	{
+		context->buf[count] = 0x80;
+		count++;
+		ft_bzero(&(context->buf[count]), 63 - count);
+		ispadding = 1;
+		return (i + count);
+	}
 	else
-		return (read_from_src(context, src, i));
+		return (i + count);
 }

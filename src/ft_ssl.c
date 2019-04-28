@@ -20,5 +20,7 @@ int				main(int argc, char const **argv)
 		return (0);
 	}
 	parsed->f(parsed->args, parsed->flags);
+	ap_del(aplst);
+	parseddel(parsed);
 	return (0);
 }

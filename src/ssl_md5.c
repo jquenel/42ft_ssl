@@ -101,6 +101,6 @@ int			ssl_md5(t_arg *args, int flags)
 		digested += ssl_md5_strarg(args, flags, context);
 	ssl_md5_reset(context);
 	digested += ssl_md5_files(args, flags, context);
-//	ssl_md5_del(context);
+	ssl_md5_del(context);
 	return (digested);
 }
