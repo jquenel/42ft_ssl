@@ -25,6 +25,8 @@ SRC_NAME=	ft_ssl.c\
 			ssl_md5_update.c\
 			ssl_md5_print.c\
 			ssl_sha256.c\
+			ssl_sha384.c\
+			ssl_sha512.c\
 			\
 			ft_putchar.c\
 			ft_putstr.c\

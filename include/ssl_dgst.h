@@ -29,5 +29,7 @@ void			ssl_md5_print(t_md5 *context, char *fname, int flags);
 
 
 int				ssl_sha256(t_arg *args, int flags);
+int				ssl_sha384(t_arg *args, int flags);
+int				ssl_sha512(t_arg *args, int flags);
 
 #endif
