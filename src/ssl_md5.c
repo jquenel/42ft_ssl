@@ -16,91 +16,48 @@ static void	ssl_md5_reset(t_md5 *context)
 	context->flen = 0;
 }
 
-static int	ssl_md5_stdin(t_arg *args, int flags, t_md5 *context)
+static int	md5_run(t_md5 *context, int fd, t_arg *arg, int flags)
 {
-	int			i;
+	int		i;
+	char	*fname;
 
-	(void)args;
-	if (flags & DGST_FLAG_STDIN)
-	{
-		while ((i = ssl_md5_fillbuf(context, NULL, i, 0)) > -1)
-			ssl_md5_update(context);
-		if (i == -2)
-			return (0);
+	fname = arg ? (char *)arg->strcnt : NULL;
+	i = 0;
+	while ((i = ssl_md5_fillbuf(context, fname, i, fd)) > -1)
 		ssl_md5_update(context);
-		ssl_md5_print(context, flags);
-		ssl_md5_reset(context);
-	}
-	return (1);
-}
-
-static int	ssl_md5_strarg(t_arg *args, int flags, t_md5 *context)
-{
-	t_arg		*cur;
-	int			i;
-
-	cur = args;
-	while (cur)
-	{
-		i = 0;
-		if (cur->flag & DGST_FLAG_STRARG)
-		{
-			while ((i = ssl_md5_fillbuf(context, cur->strcnt, i, -1)) > -1)
-				ssl_md5_update(context);
-			if (i == -2)
-				return (0);
-			ssl_md5_update(context);
-			ssl_md5_print(context, flags);
-			ssl_md5_reset(context);
-		}
-		cur = cur->next;
-	}
-	return (1);
-}
-
-static int	ssl_md5_files(t_arg *args, int flags, t_md5 *context)
-{
-	t_arg		*cur;
-	int			i;
-	int			fd;
-
-	cur = args;
-	while (cur)
-	{
-		i = 0;
-		if (!cur->flag && cur->strcnt)
-		{
-			if ((fd = open(cur->strcnt, O_RDONLY)) == -1)
-				return (0);
-			while ((i = ssl_md5_fillbuf(context, cur->strcnt, i, fd)) > -1)
-				ssl_md5_update(context);
-			if (i == -2)
-				return (0);
-			ssl_md5_update(context);
-			ssl_md5_print(context, flags);
-			ssl_md5_reset(context);
-			close(fd);
-		}
-		cur = cur->next;
-	}
-	return (1);
+	if (i == -2)
+		return (i);
+	ssl_md5_update(context);
+	ssl_md5_print(context, fname, flags);
+	ssl_md5_reset(context);
+	return (i);
 }
 
 int			ssl_md5(t_arg *args, int flags)
 {
-	int		digested;
 	t_md5	*context;
+	int		fd;
 
-	if (!(context = ssl_md5_init()))
+	if (!(context = ssl_md5_init(flags)))
 		return (0);
-	digested = 0;
-	if (flags & DGST_FLAG_STDIN)
-		digested += ssl_md5_stdin(args, flags, context);
-	ssl_md5_reset(context);
-	if (flags & DGST_FLAG_STRARG)
-		digested += ssl_md5_strarg(args, flags, context);
-	ssl_md5_reset(context);
-	digested += ssl_md5_files(args, flags, context);
+	if (flags & (DGST_FLAG_STDIN | DGST_FLAG_NOARG))
+		md5_run(context, 0, args, flags);
+	while (args)
+	{
+		if (args->flag & DGST_FLAG_STRARG)
+			md5_run(context, -1, args, flags);
+		else if (!args->flag && args->strcnt)
+		{
+			if ((fd = open(args->strcnt, O_RDONLY)) == -1)
+				ssl_nofile("md5: ", args->strcnt); 
+			else
+			{
+				md5_run(context, fd, args, flags);
+				close(fd);
+			}
+		}
+		args = args->next;
+	}
 	ssl_md5_del(context);
-	return (digested);
+	return (1);
 }

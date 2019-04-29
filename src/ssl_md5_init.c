@@ -15,7 +15,7 @@
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
 
-t_md5				*ssl_md5_init(void)
+t_md5				*ssl_md5_init(int flags)
 {
 	t_md5		*context;
 
@@ -31,6 +31,6 @@ t_md5				*ssl_md5_init(void)
 	context->words[3] = 0x10325476;
 	context->flen = 0;
 	ft_bzero(context->buf, sizeof(char) * 64);
-	context->endian = ft_endian();
+	context->flags = flags;
 	return (context);
 }

@@ -23,9 +23,9 @@ static int	pad(t_md5 *context, int count, int ispadding)
 	}
 	ft_bzero(&(context->buf[count]), 55 - count);
 	ssl_md5_encode(((uint32_t *)&(context->flen))[0], 
-			&(context->buf[56]), context->endian);
+			&(context->buf[56]));
 	ssl_md5_encode(((uint32_t *)&(context->flen))[1],
-			&(context->buf[60]), context->endian);
+			&(context->buf[60]));
 	return (-1);
 }
 
@@ -35,7 +35,12 @@ static int	read_from_x(t_md5 *context, char const *src, int i, int fd)
 
 	count = 0;
 	if (fd == 0)
-		return ft_read_stdin((char *)context->buf, 64);
+	{
+		count = ft_read_stdin((char *)context->buf, 64);
+		if ((context->flags & DGST_FLAG_STDIN) && !(isatty(0)))
+			write(1, context->buf, count);
+		return (count);
+	}
 	else if (fd > 0)
 		return read(fd, context->buf, 64);
 	else

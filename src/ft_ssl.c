@@ -4,7 +4,7 @@
 static void		ap_usage(t_argparser *aplst)
 {
 	(void)aplst;
-	ft_putstrfd("usage : ft_ssl stuff [more_stuff]\n", 2);
+	ft_putstr("usage : ft_ssl md5 [options]\n");
 }
 
 int				main(int argc, char const **argv)
@@ -19,6 +19,8 @@ int				main(int argc, char const **argv)
 		ap_usage(aplst);
 		return (0);
 	}
+	if (!parsed->args)
+		parsed->flags |= FT_SSL_NOARG;
 	parsed->f(parsed->args, parsed->flags);
 	ap_del(aplst);
 	parseddel(parsed);

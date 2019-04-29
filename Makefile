@@ -13,6 +13,7 @@ CPPFLAGS=	-Iinclude -Ilibargc/include
 SRC_NAME=	ft_ssl.c\
 			ssl_build_parsers.c\
 			ssl_dgst_parsers.c\
+			ssl_nofile.c\
 			\
 			ssl_dgst_const.c\
 			ssl_md5.c\
@@ -26,6 +27,7 @@ SRC_NAME=	ft_ssl.c\
 			ssl_sha256.c\
 			\
 			ft_putchar.c\
+			ft_putstr.c\
 			ft_read_stdin.c\
 			ft_rotl.c\
 			ft_bzero.c\

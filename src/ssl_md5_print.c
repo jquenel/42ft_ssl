@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <unistd.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
 
@@ -10,12 +11,14 @@ static void		print_hex_char(char c)
 	ft_putchar(hextable[c & 0xf]);
 }
 
-void			ssl_md5_print(t_md5 *context, int flags)
+void			ssl_md5_print(t_md5 *context, char *fname, int flags)
 {
 	int			i;
 	int			j;
 
 	i = 0;
+	if (isatty(0))
+		ft_putchar('\n');
 	while (i < 4)
 	{
 		j = 0;
@@ -27,5 +30,9 @@ void			ssl_md5_print(t_md5 *context, int flags)
 		i++;
 	}
 	ft_putchar('\n');
-	(void)flags;
+	if (!(flags & DGST_FLAG_QUIET) && fname)
+	{
+		ft_putstr(fname);
+		ft_putchar('\n');
+	}
 }
