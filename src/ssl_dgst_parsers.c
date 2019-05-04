@@ -21,8 +21,8 @@ static t_argparser	*ssl_md5_parser(void)
 
 static t_argparser	*ssl_sha2_parsers(t_argparser *model)
 {
-	char		*keys[4] = {"sha256", "sha384", "sha512", NULL};
-	t_pfunc		funcs[4] = {ssl_sha256, ssl_sha384, ssl_sha512, NULL};
+	char		*keys[5] = {"sha224", "sha256", "sha384", "sha512", NULL};
+	t_pfunc		funcs[5] = {ssl_sha224, ssl_sha256, ssl_sha384, ssl_sha512, NULL};
 	int			i;
 	t_argparser	*sha2_parsers;
 	t_argparser	*parser;

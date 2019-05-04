@@ -43,8 +43,7 @@ static void		prepare_sha256(uint32_t w[64], uint32_t h[8], t_dgst32 *context)
 	i = 0;
 	while (i < 16)
 	{
-		//w[i] = ((uint32_t *)(context->buf))[i];
-		w[i] = ssl_sha2_decode(&(context->buf[i * 4]));
+		w[i] = ssl_sha2_decode32(&(context->buf[i * 4]));
 		i++;
 	}
 	while (i < 64)

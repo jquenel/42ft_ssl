@@ -26,6 +26,7 @@ int				main(int argc, char const **argv)
 	if (!(parsed = ap_parse(aplst, argc, argv)))
 	{
 		ap_usage(aplst);
+		ap_del(aplst);
 		return (0);
 	}
 	extra_flags(parsed);
