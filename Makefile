@@ -42,6 +42,7 @@ SRC_NAME=	ft_ssl.c\
 			ssl_sha512_print.c\
 			\
 			ft_putchar.c\
+			ft_putchar_hex.c\
 			ft_putstr.c\
 			ft_read_stdin.c\
 			ft_rotl.c\

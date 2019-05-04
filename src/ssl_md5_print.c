@@ -3,40 +3,63 @@
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
 
-static void		print_hex_char(char c)
-{
-	static char	*hextable = "0123456789abcdef";
-	
-	ft_putchar(hextable[(c >> 4) & 0xf]);
-	ft_putchar(hextable[c & 0xf]);
-}
-
-void			ssl_md5_print(t_dgst32 *context, char *fname, int *flags)
+static void		print_dgst(t_dgst32 *context)
 {
 	int			i;
 	int			j;
 
 	i = 0;
-	if (*flags & DGST_FLAG_PLN)
-	{
-		*flags = (*flags & DGST_FLAG_PLN) ^ DGST_FLAG_PLN;
-		ft_putchar('\n');
-	}
 	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			print_hex_char(((char *)&(context->words[i]))[j]);
+			ft_putchar_hex(((char *)&(context->words[i]))[j]);
 			j++;
 		}
 		i++;
 	}
-	if (!(*flags & DGST_FLAG_QUIET))
+}
+
+static void		print_filenamefront(char *fname, int argflag)
+{
+	ft_putstr("MD5(");
+	if (argflag & FLAG_STR)
+	   ft_putchar('"');	
+	if (fname)
+		ft_putstr(fname);
+	else
+		ft_putstr("STDIN");
+	if (argflag & FLAG_STR)
+	   ft_putchar('"');	
+	ft_putstr(")= ");
+}
+
+static void		print_filenameback(char *fname, int argflag)
+{
+	ft_putstr(" ");
+	if (argflag & FLAG_STR)
+	   ft_putchar('"');	
+	if (fname)
+		ft_putstr(fname);
+	else
+		ft_putstr("STDIN");
+	if (argflag & FLAG_STR)
+	   ft_putchar('"');	
+}
+
+void			ssl_md5_print(t_dgst32 *context, char *fname, 
+							int argflag, int *flags)
+{
+	if (*flags & DGST_FLAG_PLN)
 	{
-		ft_putstr(" - ");
-		if (fname)
-			ft_putstr(fname);
+		*flags = (*flags & DGST_FLAG_PLN) ^ DGST_FLAG_PLN;
+		ft_putchar('\n');
 	}
+	if (!(*flags & DGST_FLAG_QUIET) && !(*flags & DGST_FLAG_REV))
+		print_filenamefront(fname, argflag);
+	print_dgst(context);
+	if (!(*flags & DGST_FLAG_QUIET) && (*flags & DGST_FLAG_REV))
+		print_filenameback(fname, argflag);
 	ft_putchar('\n');
 }

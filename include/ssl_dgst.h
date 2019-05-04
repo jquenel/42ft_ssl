@@ -47,7 +47,8 @@ int				ssl_md5(t_arg *args, int flags);
 uint32_t		ssl_md5_decode(unsigned char *input);
 void			ssl_md5_encode(uint32_t n, unsigned char *s);
 void			ssl_md5_update(t_dgst32 *context);
-void			ssl_md5_print(t_dgst32 *context, char *fname, int *flags);
+void			ssl_md5_print(t_dgst32 *context, char *fname, \
+								int argflag, int *flags);
 
 int				ssl_sha224(t_arg *args, int flags);
 int				ssl_sha256(t_arg *args, int flags);

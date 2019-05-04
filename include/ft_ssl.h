@@ -27,6 +27,7 @@ void			ssl_nofile(char const *app, char const *filename);
 
 int				ft_read_stdin(char *buf, size_t bufsize);
 int				ft_putchar(char c);
+void			ft_putchar_hex(char c);
 int				ft_putstr(char const *str);
 uint32_t		ft_rotl32(uint32_t word, uint32_t n);
 uint64_t		ft_rotl64(uint64_t word, uint64_t n);
