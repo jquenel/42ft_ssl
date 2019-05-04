@@ -3,7 +3,7 @@
 #include "ssl_dgst.h"
 #include "ssl_dgst_const.h"
 
-static void	step_one(t_md5 *context, uint32_t dw[4])
+static void	step_one(t_dgst32 *context, uint32_t dw[4])
 {
 	uint32_t	f;
 	int			i;
@@ -23,7 +23,7 @@ static void	step_one(t_md5 *context, uint32_t dw[4])
 	}
 }
 
-static void	step_two(t_md5 *context, uint32_t dw[4])
+static void	step_two(t_dgst32 *context, uint32_t dw[4])
 {
 	uint32_t	f;
 	int			i;
@@ -43,7 +43,7 @@ static void	step_two(t_md5 *context, uint32_t dw[4])
 	}
 }
 
-static void	step_three(t_md5 *context, uint32_t dw[4])
+static void	step_three(t_dgst32 *context, uint32_t dw[4])
 {
 	uint32_t	f;
 	int			i;
@@ -63,7 +63,7 @@ static void	step_three(t_md5 *context, uint32_t dw[4])
 	}
 }
 
-static void	step_four(t_md5 *context, uint32_t dw[4])
+static void	step_four(t_dgst32 *context, uint32_t dw[4])
 {
 	uint32_t	f;
 	int			i;
@@ -83,7 +83,7 @@ static void	step_four(t_md5 *context, uint32_t dw[4])
 	}
 }
 
-void		ssl_md5_update(t_md5 *context)
+void		ssl_md5_update(t_dgst32 *context)
 {
 	uint32_t	dw[4];
 

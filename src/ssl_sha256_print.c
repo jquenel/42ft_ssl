@@ -11,24 +11,23 @@ static void		print_hex_char(char c)
 	ft_putchar(hextable[c & 0xf]);
 }
 
-void			ssl_md5_print(t_dgst32 *context, char *fname, int *flags)
+void			ssl_sha256_print(t_dgst32 *context, char *fname, int *flags)
 {
 	int			i;
 	int			j;
 
-	i = 0;
-	if (*flags & DGST_FLAG_PLN)
+	if (*flags & DGST_FLAG_PLN) 
 	{
 		*flags = (*flags & DGST_FLAG_PLN) ^ DGST_FLAG_PLN;
 		ft_putchar('\n');
 	}
-	while (i < 4)
+	while (i < 8)
 	{
-		j = 0;
-		while (j < 4)
+		j = 3;
+		while (j >= 0)
 		{
 			print_hex_char(((char *)&(context->words[i]))[j]);
-			j++;
+			j--;
 		}
 		i++;
 	}

@@ -1,10 +1,19 @@
+#include <unistd.h>
 #include "libargc.h"
 #include "ft_ssl.h"
 
 static void		ap_usage(t_argparser *aplst)
 {
 	(void)aplst;
-	ft_putstr("usage : ft_ssl md5 [options]\n");
+	ft_putstrfd("usage : ft_ssl stuff [more_stuff]\n", 2);
+}
+
+static void		extra_flags(t_parsed *parsed)
+{
+	if (!parsed->args)
+		parsed->flags |= FT_SSL_NOARG;
+	if ((parsed->flags & (FT_SSL_NOARG | FT_SSL_STDIN)) && isatty(0))
+		parsed->flags |= FT_SSL_PLN;
 }
 
 int				main(int argc, char const **argv)
@@ -19,8 +28,7 @@ int				main(int argc, char const **argv)
 		ap_usage(aplst);
 		return (0);
 	}
-	if (!parsed->args)
-		parsed->flags |= FT_SSL_NOARG;
+	extra_flags(parsed);
 	parsed->f(parsed->args, parsed->flags);
 	ap_del(aplst);
 	parseddel(parsed);

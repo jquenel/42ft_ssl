@@ -16,22 +16,27 @@ SRC_NAME=	ft_ssl.c\
 			ssl_nofile.c\
 			\
 			ssl_dgst_const.c\
+			ssl_dgst32_init.c\
+			ssl_dgst32_del.c\
+			ssl_dgst32_fillbuf.c\
 			ssl_md5.c\
-			ssl_md5_init.c\
-			ssl_md5_del.c\
 			ssl_md5_encode.c\
 			ssl_md5_decode.c\
-			ssl_md5_fillbuf.c\
 			ssl_md5_update.c\
 			ssl_md5_print.c\
 			ssl_sha256.c\
 			ssl_sha384.c\
 			ssl_sha512.c\
+			ssl_sha2_encode.c\
+			ssl_sha2_decode.c\
+			ssl_sha256_update.c\
+			ssl_sha256_print.c\
 			\
 			ft_putchar.c\
 			ft_putstr.c\
 			ft_read_stdin.c\
 			ft_rotl.c\
+			ft_rotr.c\
 			ft_bzero.c\
 			ft_endian.c\
 			\

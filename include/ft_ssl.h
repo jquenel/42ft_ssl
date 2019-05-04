@@ -15,6 +15,11 @@
 # endif
 
 # define FT_SSL_NOARG		FLAG_N
+# define FT_SSL_STDIN		FLAG_P
+# define FT_SSL_QUIET		FLAG_Q
+# define FT_SSL_REV			FLAG_R
+# define FT_SSL_STRARG		FLAG_S
+# define FT_SSL_PLN			FLAG_27
 
 t_argparser		*ssl_build_parsers(void);
 t_argparser		*ssl_dgst_parsers(void);
@@ -24,6 +29,9 @@ int				ft_read_stdin(char *buf, size_t bufsize);
 int				ft_putchar(char c);
 int				ft_putstr(char const *str);
 uint32_t		ft_rotl32(uint32_t word, uint32_t n);
+uint64_t		ft_rotl64(uint64_t word, uint64_t n);
+uint32_t		ft_rotr32(uint32_t word, uint32_t n);
+uint64_t		ft_rotr64(uint64_t word, uint64_t n);
 void			ft_bzero(void *ptr, size_t n);
 int				ft_endian(void);
 
