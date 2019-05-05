@@ -33,7 +33,7 @@ static int	sha224_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 	if (i == -2)
 		return (i);
 	ssl_sha256_update(context);
-	ssl_sha224_print(context, fname, flags);
+	ssl_sha224_print(context, fname, arg ? arg->flag : 0, flags);
 	return (i);
 }
 

@@ -60,9 +60,13 @@ uint32_t		ssl_sha2_decode32(unsigned char *input);
 uint64_t		ssl_sha2_decode64(unsigned char *input);
 void			ssl_sha256_update(t_dgst32 *context);
 void			ssl_sha512_update(t_dgst64 *context);
-void			ssl_sha224_print(t_dgst32 *context, char *fname, int *flags);
-void			ssl_sha256_print(t_dgst32 *context, char *fname, int *flags);
-void			ssl_sha384_print(t_dgst64 *context, char *fname, int *flags);
-void			ssl_sha512_print(t_dgst64 *context, char *fname, int *flags);
+void			ssl_sha224_print(t_dgst32 *context, char *fname, \
+									int argflag, int *flags);
+void			ssl_sha256_print(t_dgst32 *context, char *fname, \
+									int argflag, int *flags);
+void			ssl_sha384_print(t_dgst64 *context, char *fname, \
+									int argflag, int *flags);
+void			ssl_sha512_print(t_dgst64 *context, char *fname, \
+									int argflag, int *flags);
 
 #endif

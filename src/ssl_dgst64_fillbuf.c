@@ -58,7 +58,7 @@ int			ssl_dgst64_fillbuf(t_dgst64 *context, char const *src, \
 	{
 		context->buf[count] = 0x80;
 		count++;
-		ft_bzero(&(context->buf[count]), 127 - count);
+		ft_bzero(&(context->buf[count]), 128 - count);
 		ispadding = 1;
 		return (i + count);
 	}

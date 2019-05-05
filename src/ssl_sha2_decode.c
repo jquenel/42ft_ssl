@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "ft_ssl.h"
+#include "ssl_dgst.h"
 
 uint32_t		ssl_sha2_decode32(unsigned char *input)
 {

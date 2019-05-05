@@ -33,7 +33,7 @@ static int	sha512_run(t_dgst64 *context, int fd, t_arg *arg, int *flags)
 	if (i == -2)
 		return (i);
 	ssl_sha512_update(context);
-	ssl_sha512_print(context, fname, flags);
+	ssl_sha512_print(context, fname, arg ? arg->flag : 0, flags);
 	return (i);
 }
 
