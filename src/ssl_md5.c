@@ -28,7 +28,7 @@ static int	md5_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 	if (i == -2)
 		return (i);
 	ssl_md5_update(context);
-	ssl_md5_print(context, fname, arg->flag, flags);
+	ssl_md5_print(context, fname, arg ? arg->flag : 0, flags);
 	ssl_md5_reset(context);
 	return (i);
 }
