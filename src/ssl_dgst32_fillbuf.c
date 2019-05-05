@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_dgst32_fillbuf.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:23:11 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:24:08 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -13,7 +25,7 @@ static int	pad(t_dgst32 *context, int count, int ispadding)
 	if (context->hashlen == 8)
 		ssl_sha2_encode64(context->flen, &(context->buf[56]));
 	else
-		ssl_md5_encode(context->flen, &(context->buf[56])); 
+		ssl_md5_encode(context->flen, &(context->buf[56]));
 	return (-1);
 }
 
@@ -30,7 +42,7 @@ static int	read_from_x(t_dgst32 *context, char const *src, int i, int fd)
 		return (count);
 	}
 	else if (fd > 0)
-		return read(fd, context->buf, 64);
+		return (read(fd, context->buf, 64));
 	else
 	{
 		if (!src)

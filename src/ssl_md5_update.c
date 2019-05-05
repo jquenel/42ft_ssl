@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_md5_update.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:27:58 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:41:22 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdint.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -14,11 +26,11 @@ static void	step_one(t_dgst32 *context, uint32_t dw[4])
 	{
 		f = ((dw[1]) & (dw[2])) | ((~dw[1]) & (dw[3]));
 		g = i;
-		f = f + dw[0] + md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
+		f = f + dw[0] + g_md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
 		dw[0] = dw[3];
 		dw[3] = dw[2];
 		dw[2] = dw[1];
-		dw[1] = dw[1] + ft_rotl32(f, md5_s[i]);
+		dw[1] = dw[1] + ft_rotl32(f, g_md5_s[i]);
 		i++;
 	}
 }
@@ -34,11 +46,11 @@ static void	step_two(t_dgst32 *context, uint32_t dw[4])
 	{
 		f = ((dw[1] & dw[3]) | (dw[2] & (~dw[3])));
 		g = (5 * i + 1) % 16;
-		f = f + dw[0] + md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
+		f = f + dw[0] + g_md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
 		dw[0] = dw[3];
 		dw[3] = dw[2];
 		dw[2] = dw[1];
-		dw[1] = dw[1] + ft_rotl32(f, md5_s[i]);
+		dw[1] = dw[1] + ft_rotl32(f, g_md5_s[i]);
 		i++;
 	}
 }
@@ -54,14 +66,13 @@ static void	step_three(t_dgst32 *context, uint32_t dw[4])
 	{
 		f = (dw[1] ^ dw[2] ^ dw[3]);
 		g = (3 * i + 5) % 16;
-		f = f + dw[0] + md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
+		f = f + dw[0] + g_md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
 		dw[0] = dw[3];
 		dw[3] = dw[2];
 		dw[2] = dw[1];
-		dw[1] = dw[1] + ft_rotl32(f, md5_s[i]);
+		dw[1] = dw[1] + ft_rotl32(f, g_md5_s[i]);
 		i++;
 	}
-
 }
 
 static void	step_four(t_dgst32 *context, uint32_t dw[4])
@@ -75,11 +86,11 @@ static void	step_four(t_dgst32 *context, uint32_t dw[4])
 	{
 		f = (dw[2] ^ (dw[1] | (~dw[3])));
 		g = (7 * i) % 16;
-		f = f + dw[0] + md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
+		f = f + dw[0] + g_md5_k[i] + ssl_md5_decode(&(context->buf[g * 4]));
 		dw[0] = dw[3];
 		dw[3] = dw[2];
 		dw[2] = dw[1];
-		dw[1] = dw[1] + ft_rotl32(f, md5_s[i]);
+		dw[1] = dw[1] + ft_rotl32(f, g_md5_s[i]);
 		i++;
 	}
 }

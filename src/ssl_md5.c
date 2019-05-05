@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_md5.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:29:27 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:30:20 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -37,7 +49,7 @@ static int	md5_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 int			ssl_md5(t_arg *args, int flags)
 {
 	t_dgst32	*context;
-	int		fd;
+	int			fd;
 
 	if (!(context = ssl_dgst32_init(MD5_HASHLEN, flags)))
 		return (0);
@@ -50,7 +62,7 @@ int			ssl_md5(t_arg *args, int flags)
 		else if (!args->flag && args->strcnt)
 		{
 			if ((fd = open(args->strcnt, O_RDONLY)) == -1)
-				ssl_nofile("md5: ", args->strcnt); 
+				ssl_nofile("md5: ", args->strcnt);
 			else
 			{
 				md5_run(context, fd, args, &flags);

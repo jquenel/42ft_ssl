@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_dgst64_fillbuf.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:31:13 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:31:32 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -27,7 +39,7 @@ static int	read_from_x(t_dgst64 *context, char const *src, int i, int fd)
 		return (count);
 	}
 	else if (fd > 0)
-		return read(fd, context->buf, 128);
+		return (read(fd, context->buf, 128));
 	else
 	{
 		if (!src)

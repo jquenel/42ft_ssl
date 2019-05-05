@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_dgst.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:46:59 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:48:16 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SSL_DGST_H
 # define SSL_DGST_H
 
-#include <stdint.h>
-#include "libargc.h"
+# include <stdint.h>
+# include "ft_ssl.h"
+# include "libargc.h"
 
 # define DGST_FLAG_STDIN	FT_SSL_STDIN
 # define DGST_FLAG_STRARG	FT_SSL_STRARG
@@ -14,24 +27,23 @@
 # define MD5_HASHLEN		4
 # define SHA2_HASHLEN		8
 
-typedef struct			s_dgst32
+typedef struct	s_dgst32
 {
 	uint64_t		flen;
 	size_t			hashlen;
 	int				flags;
 	uint32_t		*words;
 	unsigned char	*buf;
-}						t_dgst32;
+}				t_dgst32;
 
-typedef struct			s_dgst64
+typedef struct	s_dgst64
 {
 	__uint128_t		flen;
 	size_t			hashlen;
 	int				flags;
 	uint64_t		*words;
 	unsigned char	*buf;
-}						t_dgst64;
-
+}				t_dgst64;
 
 t_dgst32		*ssl_dgst32_init(size_t hashlen, int flags);
 void			ssl_dgst32_del(t_dgst32 *context);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_dgst_parsers.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:35:38 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:40:39 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libargc.h"
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -21,11 +33,12 @@ static t_argparser	*ssl_md5_parser(void)
 
 static t_argparser	*ssl_sha2_parsers(t_argparser *model)
 {
-	char		*keys[5] = {"sha224", "sha256", "sha384", "sha512", NULL};
-	t_pfunc		funcs[5] = {ssl_sha224, ssl_sha256, ssl_sha384, ssl_sha512, NULL};
-	int			i;
-	t_argparser	*sha2_parsers;
-	t_argparser	*parser;
+	static char		*keys[5] = {"sha224", "sha256", "sha384", "sha512", NULL};
+	static t_pfunc	funcs[5] = {ssl_sha224, ssl_sha256, ssl_sha384, \
+	ssl_sha512, NULL};
+	int				i;
+	t_argparser		*sha2_parsers;
+	t_argparser		*parser;
 
 	sha2_parsers = NULL;
 	i = 0;

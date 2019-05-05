@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_sha384.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:41:41 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:41:43 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -53,7 +65,7 @@ int			ssl_sha384(t_arg *args, int flags)
 		else if (!args->flag && args->strcnt)
 		{
 			if ((fd = open(args->strcnt, O_RDONLY)) == -1)
-				ssl_nofile("sha384: ", args->strcnt); 
+				ssl_nofile("sha384: ", args->strcnt);
 			else
 			{
 				sha384_run(context, fd, args, &flags);

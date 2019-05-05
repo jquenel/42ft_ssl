@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ssl.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:46:50 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:46:51 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SSL_H
 # define FT_SSL_H
 
-#include <stdint.h>
-#include "libargc.h"
-
-#include <stdio.h> //
+# include <stdint.h>
+# include "libargc.h"
 
 # ifndef BIG_ENDIAN
 #  define BIG_ENDIAN		4321

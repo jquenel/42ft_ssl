@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_sha256_update.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:28:28 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:42:35 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdint.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -22,7 +34,7 @@ static void		sha256_dgst(uint32_t w[64], uint32_t h[8], int i)
 
 	s0 = ft_rotr32(h[0], 2) ^ ft_rotr32(h[0], 13) ^ ft_rotr32(h[0], 22);
 	s1 = ft_rotr32(h[4], 6) ^ ft_rotr32(h[4], 11) ^ ft_rotr32(h[4], 25);
-	t0 = h[7] + s1 + ch(h[4], h[5], h[6]) + sha256_k[i] + w[i]; 
+	t0 = h[7] + s1 + ch(h[4], h[5], h[6]) + g_sha256_k[i] + w[i];
 	t1 = s0 + maj(h[0], h[1], h[2]);
 	h[7] = h[6];
 	h[6] = h[5];
@@ -68,7 +80,7 @@ void			ssl_sha256_update(t_dgst32 *context)
 	uint32_t	w[64];
 	uint32_t	h[8];
 	int			i;
-	
+
 	ft_bzero(w, sizeof(uint32_t) * 64);
 	prepare_sha256(w, h, context);
 	i = 0;

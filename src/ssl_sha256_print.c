@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_sha256_print.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:39:51 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:39:52 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdint.h>
 #include <unistd.h>
 #include "ft_ssl.h"
@@ -25,13 +37,13 @@ static void		print_filenamefront(char *fname, int argflag)
 {
 	ft_putstr("SHA256(");
 	if (argflag & FLAG_STR)
-	   ft_putchar('"');	
+		ft_putchar('"');
 	if (fname)
 		ft_putstr(fname);
 	else
 		ft_putstr("STDIN");
 	if (argflag & FLAG_STR)
-	   ft_putchar('"');	
+		ft_putchar('"');
 	ft_putstr(") = ");
 }
 
@@ -39,19 +51,19 @@ static void		print_filenameback(char *fname, int argflag)
 {
 	ft_putstr(" ");
 	if (argflag & FLAG_STR)
-	   ft_putchar('"');	
+		ft_putchar('"');
 	if (fname)
 		ft_putstr(fname);
 	else
 		ft_putstr("STDIN");
 	if (argflag & FLAG_STR)
-	   ft_putchar('"');	
+		ft_putchar('"');
 }
 
 void			ssl_sha256_print(t_dgst32 *context, char *fname, \
 							int argflag, int *flags)
 {
-	if (*flags & DGST_FLAG_PLN) 
+	if (*flags & DGST_FLAG_PLN)
 	{
 		*flags = (*flags & DGST_FLAG_PLN) ^ DGST_FLAG_PLN;
 		ft_putchar('\n');

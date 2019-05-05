@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ssl_sha512_update.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/05 23:28:59 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/05 23:44:27 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdint.h>
 #include "ft_ssl.h"
 #include "ssl_dgst.h"
@@ -22,7 +34,7 @@ static void		sha512_dgst(uint64_t w[64], uint64_t h[8], int i)
 
 	s0 = ft_rotr64(h[0], 28) ^ ft_rotr64(h[0], 34) ^ ft_rotr64(h[0], 39);
 	s1 = ft_rotr64(h[4], 14) ^ ft_rotr64(h[4], 18) ^ ft_rotr64(h[4], 41);
-	t0 = h[7] + s1 + ch(h[4], h[5], h[6]) + sha512_k[i] + w[i]; 
+	t0 = h[7] + s1 + ch(h[4], h[5], h[6]) + g_sha512_k[i] + w[i];
 	t1 = s0 + maj(h[0], h[1], h[2]);
 	h[7] = h[6];
 	h[6] = h[5];
@@ -68,7 +80,7 @@ void			ssl_sha512_update(t_dgst64 *context)
 	uint64_t	w[80];
 	uint64_t	h[8];
 	int			i;
-	
+
 	ft_bzero(w, sizeof(uint64_t) * 80);
 	prepare_sha512(w, h, context);
 	i = 0;
