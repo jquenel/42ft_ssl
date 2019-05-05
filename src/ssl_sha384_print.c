@@ -32,7 +32,7 @@ static void		print_filenamefront(char *fname, int argflag)
 		ft_putstr("STDIN");
 	if (argflag & FLAG_STR)
 	   ft_putchar('"');	
-	ft_putstr(")= ");
+	ft_putstr(") = ");
 }
 
 static void		print_filenameback(char *fname, int argflag)
