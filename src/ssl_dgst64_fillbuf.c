@@ -9,7 +9,7 @@ static int	pad(t_dgst64 *context, int count, int ispadding)
 		context->buf[count] = 0x80;
 		count++;
 	}
-	ft_bzero(&(context->buf[count]), 111 - count);
+	ft_bzero(&(context->buf[count]), 112 - count);
 	ssl_sha2_encode128(context->flen, &(context->buf[112]));
 	return (-1);
 }

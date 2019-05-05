@@ -22,6 +22,7 @@ static int	md5_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 	char	*fname;
 
 	fname = arg ? (char *)arg->strcnt : NULL;
+	ssl_md5_reset(context);
 	i = 0;
 	while ((i = ssl_dgst32_fillbuf(context, fname, i, fd)) > -1)
 		ssl_md5_update(context);

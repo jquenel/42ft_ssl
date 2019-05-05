@@ -16,6 +16,7 @@ void			ssl_sha512_print(t_dgst64 *context, char *fname, int *flags)
 	int			i;
 	int			j;
 
+	i = 0;
 	if (*flags & DGST_FLAG_PLN) 
 	{
 		*flags = (*flags & DGST_FLAG_PLN) ^ DGST_FLAG_PLN;

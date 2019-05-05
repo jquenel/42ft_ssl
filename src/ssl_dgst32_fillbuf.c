@@ -9,8 +9,11 @@ static int	pad(t_dgst32 *context, int count, int ispadding)
 		context->buf[count] = 0x80;
 		count++;
 	}
-	ft_bzero(&(context->buf[count]), 55 - count);
-	ssl_sha2_encode64(context->flen, &(context->buf[56]));
+	ft_bzero(&(context->buf[count]), 56 - count);
+	if (context->hashlen == 8)
+		ssl_sha2_encode64(context->flen, &(context->buf[56]));
+	else
+		ssl_md5_encode(context->flen, &(context->buf[56])); 
 	return (-1);
 }
 

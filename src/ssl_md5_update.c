@@ -61,6 +61,7 @@ static void	step_three(t_dgst32 *context, uint32_t dw[4])
 		dw[1] = dw[1] + ft_rotl32(f, md5_s[i]);
 		i++;
 	}
+
 }
 
 static void	step_four(t_dgst32 *context, uint32_t dw[4])
