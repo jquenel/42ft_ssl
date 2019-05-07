@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:46:50 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:46:51 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/07 20:34:07 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define FT_SSL_STRARG		FLAG_S
 # define FT_SSL_PLN			FLAG_27
 
+void			ft_ssl_usage(void);
 t_argparser		*ssl_build_parsers(void);
 t_argparser		*ssl_dgst_parsers(void);
 void			ssl_nofile(char const *app, char const *filename);

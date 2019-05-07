@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:38:58 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:39:18 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/07 20:43:45 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		print_dgst(t_dgst64 *context)
 
 static void		print_filenamefront(char *fname, int argflag)
 {
-	ft_putstr("SHA384(");
+	ft_putstr("SHA384 (");
 	if (argflag & FLAG_STR)
 		ft_putchar('"');
 	if (fname)

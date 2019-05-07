@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:33:04 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:33:48 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/07 20:43:13 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		print_dgst(t_dgst32 *context)
 
 static void		print_filenamefront(char *fname, int argflag)
 {
-	ft_putstr("MD5(");
+	ft_putstr("MD5 (");
 	if (argflag & FLAG_STR)
 		ft_putchar('"');
 	if (fname)

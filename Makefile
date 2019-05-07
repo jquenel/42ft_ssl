@@ -11,6 +11,7 @@ OBJ_PATH=	obj
 CPPFLAGS=	-Iinclude -Ilibargc/include
 
 SRC_NAME=	ft_ssl.c\
+			ft_ssl_usage.c\
 			ssl_build_parsers.c\
 			ssl_dgst_parsers.c\
 			ssl_nofile.c\
