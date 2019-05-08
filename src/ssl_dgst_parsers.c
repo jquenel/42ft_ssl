@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:35:38 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/08 18:12:18 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:18:58 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static t_argparser	*ssl_sha2_parsers(t_argparser *model)
 	t_argparser		*parser;
 	int				i;
 	static t_pfunc	funcs[5] = {ssl_sha224, ssl_sha256, ssl_sha384, \
-	static char		*keys[5] = {"sha224", "sha256", "sha384", "sha512", NULL};
 	ssl_sha512, NULL};
+	static char		*keys[5] = {"sha224", "sha256", "sha384", "sha512", NULL};
 
 	sha2_parsers = NULL;
 	i = 0;
