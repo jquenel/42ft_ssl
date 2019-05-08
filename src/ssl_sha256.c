@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:36:40 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:36:41 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:13:18 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	ssl_sha256_reset(t_dgst32 *context)
 
 static int	sha256_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 {
-	int				i;
 	char			*fname;
+	int				i;
 
 	fname = arg ? (char *)arg->strcnt : NULL;
 	ssl_sha256_reset(context);

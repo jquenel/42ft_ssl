@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:29:27 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:30:20 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:12:27 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	ssl_md5_reset(t_dgst32 *context)
 
 static int	md5_run(t_dgst32 *context, int fd, t_arg *arg, int *flags)
 {
-	int		i;
 	char	*fname;
+	int		i;
 
 	fname = arg ? (char *)arg->strcnt : NULL;
 	ssl_md5_reset(context);

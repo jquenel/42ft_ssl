@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:43:57 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:43:58 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:14:05 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	ssl_sha512_reset(t_dgst64 *context)
 
 static int	sha512_run(t_dgst64 *context, int fd, t_arg *arg, int *flags)
 {
-	int				i;
 	char			*fname;
+	int				i;
 
 	fname = arg ? (char *)arg->strcnt : NULL;
 	ssl_sha512_reset(context);

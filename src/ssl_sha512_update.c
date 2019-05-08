@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:28:59 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:44:27 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:14:33 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static void		sha512_dgst(uint64_t w[64], uint64_t h[8], int i)
 
 static void		prepare_sha512(uint64_t w[64], uint64_t h[8], t_dgst64 *context)
 {
-	int			i;
 	uint64_t	s0;
 	uint64_t	s1;
+	int			i;
 
 	i = 0;
 	while (i < 16)

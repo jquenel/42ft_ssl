@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:41:41 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/05 23:41:43 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:13:51 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	ssl_sha384_reset(t_dgst64 *context)
 
 static int	sha384_run(t_dgst64 *context, int fd, t_arg *arg, int *flags)
 {
-	int				i;
 	char			*fname;
+	int				i;
 
 	fname = arg ? (char *)arg->strcnt : NULL;
 	ssl_sha384_reset(context);
