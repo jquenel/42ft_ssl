@@ -14,6 +14,7 @@ SRC_NAME=	ft_ssl.c\
 			ft_ssl_usage.c\
 			ssl_build_parsers.c\
 			ssl_dgst_parsers.c\
+			ssl_cipher_parsers.c\
 			ssl_nofile.c\
 			\
 			ssl_dgst_const.c\
@@ -42,6 +43,8 @@ SRC_NAME=	ft_ssl.c\
 			ssl_sha384_print.c\
 			ssl_sha512_print.c\
 			\
+			ssl_base64.c\
+			\
 			ft_putchar.c\
 			ft_putchar_hex.c\
 			ft_putstr.c\
@@ -62,7 +65,7 @@ OBJ_NAME=	$(SRC_NAME:.c=.o)
 ##		COMPILER FLAGS
 ##
 
-CFLAGS=		-Wextra -Wall -Wpadded -g -fsanitize=address
+CFLAGS=		-Wextra -Wall -Werror -g -fsanitize=address
 
 CC=			gcc
 

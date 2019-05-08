@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ssl_build_parsers.c                                :+:      :+:    :+:   */
+/*   ssl_cipher.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/05 23:20:54 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/08 18:23:50 by jquenel          ###   ########.fr       */
+/*   Created: 2019/05/08 18:20:42 by jquenel           #+#    #+#             */
+/*   Updated: 2019/05/08 18:23:03 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libargc.h"
-#include "ft_ssl.h"
+#ifndef SSL_CIPHER_H
+# define SSL_CIPHER_H
 
-t_argparser		*ssl_build_parsers(void)
-{
-	t_argparser		*aplst;
-	t_argparser		*parser;
+# include <stdint.h>
+# include "ft_ssl.h"
+# include "libargc.h"
 
-	aplst = NULL;
-	if (!(parser = ssl_dgst_parsers()))
-		return (NULL);
-	aplst = ap_pushb(aplst, parser);
-	if (!(parser = ssl_cipher_parsers()))
-		return (NULL);
-	aplst = ap_pushb(aplst, parser);
-	return (aplst);
-}
+int			ssl_base64(t_arg *args, int flags);
+
+#endif

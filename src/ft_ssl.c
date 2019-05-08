@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:22:55 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/07 20:33:46 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:32:49 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				main(int argc, char const **argv)
 		ap_del(aplst);
 		return (0);
 	}
+	//clean_args(parsed);
 	extra_flags(parsed);
 	parsed->f(parsed->args, parsed->flags);
 	ap_del(aplst);

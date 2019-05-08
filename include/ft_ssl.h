@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 23:46:50 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/07 20:34:07 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:20:19 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 void			ft_ssl_usage(void);
 t_argparser		*ssl_build_parsers(void);
 t_argparser		*ssl_dgst_parsers(void);
+t_argparser		*ssl_cipher_parsers(void);
 void			ssl_nofile(char const *app, char const *filename);
 
 int				ft_read_stdin(char *buf, size_t bufsize);

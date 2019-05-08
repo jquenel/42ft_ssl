@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 20:33:14 by jquenel           #+#    #+#             */
-/*   Updated: 2019/05/07 20:37:09 by jquenel          ###   ########.fr       */
+/*   Updated: 2019/05/08 18:31:02 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void		dgst_usage(void)
 static void		cipher_usage(void)
 {
 	ft_putstr("\nCipher commands:\n");
+	ft_putstr("base64\n");
 }
 
 void		ft_ssl_usage(void)
